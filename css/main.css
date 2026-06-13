@@ -7,15 +7,14 @@
 }
 
 :root {
-  --bg:          #0f0d0a;
-  --bg-raised:   #1a1510;
-  --bg-surface:  #221c13;
-  --text:        #f0ebe1;
-  --text-muted:  #8a7d6a;
-  --text-quiet:  #4a4035;
+  --bg:          #f2ede3;
+  --bg-raised:   #e8e2d6;
+  --bg-surface:  #ddd7ca;
+  --text:        #1a1510;
+  --text-muted:  #6b5e4a;
+  --text-quiet:  #a09080;
   --accent:      #c85a35;
-  --accent-deep: #8B1A1A;
-  --rule:        #2a2018;
+  --rule:        #cfc8bc;
   --font-latin:  'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --font-zh:     'Noto Serif SC', 'STSong', 'SimSun', serif;
 }
@@ -37,21 +36,21 @@ body {
 }
 
 @keyframes pageIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* grain overlay — css svg turbulence, no JS required */
+/* paper grain — css svg turbulence, multiply blend darkens light ground */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 250px 250px;
-  opacity: 0.048;
-  mix-blend-mode: overlay;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -73,7 +72,7 @@ a { color: inherit; text-decoration: none; }
 /* ── SITE HEADER ─────────────────────────────── */
 
 .site-header {
-  padding: 2rem 0;
+  padding: 1.75rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -89,12 +88,12 @@ a { color: inherit; text-decoration: none; }
 .site-logo {
   font-family: var(--font-zh);
   font-weight: 300;
-  font-size: 1.9rem;
-  letter-spacing: 0.18em;
+  font-size: 1.7rem;
+  letter-spacing: 0.2em;
   color: var(--text);
   transition: opacity 0.2s;
 }
-.site-logo:hover { opacity: 0.65; }
+.site-logo:hover { opacity: 0.5; }
 
 .site-nav {
   display: flex;
@@ -103,11 +102,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 .site-nav a {
-  color: var(--text-muted);
-  font-size: 0.78rem;
+  color: var(--text-quiet);
+  font-size: 0.75rem;
   letter-spacing: 0.22em;
   text-transform: lowercase;
   transition: color 0.2s;
+  font-family: var(--font-latin);
+  font-style: italic;
 }
 .site-nav a:hover,
 .site-nav a.active { color: var(--text); }
@@ -115,23 +116,24 @@ a { color: inherit; text-decoration: none; }
 /* ── HERO ────────────────────────────────────── */
 
 .hero {
-  min-height: 88vh;
+  min-height: 86vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 6rem 2rem;
+  position: relative;
 }
 
 .hero-logotype {
   font-family: var(--font-zh);
   font-weight: 300;
-  font-size: clamp(5.5rem, 16vw, 10rem);
-  letter-spacing: 0.28em;
+  font-size: clamp(6rem, 18vw, 11rem);
+  letter-spacing: 0.32em;
   line-height: 1;
   color: var(--text);
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 }
 
 .hero-sub {
@@ -139,37 +141,37 @@ a { color: inherit; text-decoration: none; }
   font-style: italic;
   font-weight: 300;
   font-size: 1.05rem;
-  letter-spacing: 0.42em;
+  letter-spacing: 0.52em;
   color: var(--text-muted);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
 }
 
 .hero-gloss {
-  font-size: 0.7rem;
-  letter-spacing: 0.32em;
+  font-size: 0.68rem;
+  letter-spacing: 0.38em;
   text-transform: uppercase;
   color: var(--text-quiet);
 }
 
 .hero-spine {
   width: 1px;
-  height: 5rem;
+  height: 4.5rem;
   background: linear-gradient(to bottom, transparent, var(--rule), transparent);
   margin: 3.5rem auto;
 }
 
 .hero-term-now {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
+  font-size: 0.62rem;
+  letter-spacing: 0.38em;
   text-transform: uppercase;
   color: var(--text-quiet);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.85rem;
 }
 
 .hero-term-chinese {
   font-family: var(--font-zh);
   font-weight: 300;
-  font-size: 1.9rem;
+  font-size: 2rem;
   letter-spacing: 0.22em;
   color: var(--accent);
   margin-bottom: 0.4rem;
@@ -186,7 +188,7 @@ a { color: inherit; text-decoration: none; }
 
 .tree-window-wrap {
   margin: 5rem auto;
-  max-width: 360px;
+  max-width: 340px;
   width: 100%;
 }
 
@@ -205,7 +207,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--rule);
   pointer-events: none;
   z-index: 2;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .tree-window__svg {
@@ -217,7 +219,7 @@ a { color: inherit; text-decoration: none; }
 .tree-window__caption {
   text-align: center;
   margin-top: 1rem;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.22em;
   color: var(--text-quiet);
   font-style: italic;
@@ -227,32 +229,33 @@ a { color: inherit; text-decoration: none; }
 
 .entry-excerpt-wrap {
   text-align: center;
-  max-width: 580px;
+  max-width: 560px;
   margin: 0 auto 5rem;
 }
 
 .entry-excerpt-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.38em;
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 2rem;
 }
 
 .entry-excerpt-text {
-  font-size: 1.2rem;
+  font-size: 1.18rem;
   font-weight: 300;
   font-style: italic;
-  line-height: 2.05;
+  line-height: 2.1;
   color: var(--text);
   margin-bottom: 2.5rem;
 }
 
 .cta-link {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.3em;
   text-transform: lowercase;
+  font-style: italic;
   color: var(--accent);
   border-bottom: 1px solid transparent;
   padding-bottom: 2px;
@@ -293,7 +296,7 @@ a { color: inherit; text-decoration: none; }
 .term-nav__next:hover { color: var(--text); }
 
 .term-nav__arrow {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--text-quiet);
 }
 
@@ -305,20 +308,22 @@ a { color: inherit; text-decoration: none; }
 }
 
 .term-nav__label {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--text-quiet);
+  font-style: italic;
 }
 
 .term-nav__center a {
-  font-size: 0.62rem;
-  letter-spacing: 0.32em;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-quiet);
   transition: color 0.2s;
   text-align: center;
   display: block;
+  font-style: italic;
 }
 .term-nav__center a:hover { color: var(--text-muted); }
 
@@ -340,9 +345,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 .site-footer__text {
-  font-size: 0.65rem;
-  letter-spacing: 0.22em;
+  font-size: 0.63rem;
+  letter-spacing: 0.24em;
   color: var(--text-quiet);
+  font-style: italic;
 }
 
 /* ── ENTRY PAGE HEADER ───────────────────────── */
@@ -353,11 +359,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 .entry-term-num {
-  font-size: 0.62rem;
-  letter-spacing: 0.38em;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--text-quiet);
   margin-bottom: 1.6rem;
+  font-style: italic;
 }
 
 .entry-term-name {
@@ -367,6 +374,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.22em;
   line-height: 1;
   margin-bottom: 1rem;
+  color: var(--text);
 }
 
 .entry-term-pinyin {
@@ -378,8 +386,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .entry-term-english {
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
+  font-size: 0.7rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-quiet);
 }
@@ -401,7 +409,7 @@ a { color: inherit; text-decoration: none; }
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--text-quiet);
+  background: var(--rule);
   margin: 0 0.25rem;
   vertical-align: middle;
 }
@@ -418,8 +426,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .entry-body p {
-  font-size: 1.12rem;
-  line-height: 2.05;
+  font-size: 1.1rem;
+  line-height: 2.1;
   color: var(--text);
   margin-bottom: 1.65rem;
   font-weight: 300;
@@ -436,14 +444,15 @@ a { color: inherit; text-decoration: none; }
 }
 
 .section-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.42em;
+  font-size: 0.6rem;
+  letter-spacing: 0.44em;
   text-transform: uppercase;
   color: var(--accent);
   display: flex;
   align-items: center;
   gap: 1.5rem;
   margin: 3.5rem 0 2rem;
+  font-style: italic;
 }
 
 .section-label::after {
@@ -469,10 +478,11 @@ a { color: inherit; text-decoration: none; }
   left: 2rem;
   background: var(--bg-raised);
   padding: 0 0.75rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.32em;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--accent);
+  font-style: italic;
 }
 
 .recipe__title-zh {
@@ -481,6 +491,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.7rem;
   letter-spacing: 0.12em;
   margin-bottom: 0.2rem;
+  color: var(--text);
 }
 
 .recipe__title-en {
@@ -491,7 +502,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .recipe__yield {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.18em;
   color: var(--text-quiet);
   margin-bottom: 2.25rem;
@@ -505,11 +516,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 .recipe__subhead {
-  font-size: 0.62rem;
-  letter-spacing: 0.32em;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-quiet);
   margin-bottom: 1rem;
+  font-style: italic;
 }
 
 .recipe-ingredients {
@@ -524,6 +536,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.55rem 0;
   border-bottom: 1px solid var(--rule);
   font-size: 0.95rem;
+  color: var(--text);
 }
 .recipe-ingredients li:last-child { border-bottom: none; }
 
@@ -546,18 +559,20 @@ a { color: inherit; text-decoration: none; }
   gap: 1.25rem;
   margin-bottom: 1.1rem;
   font-size: 0.95rem;
-  line-height: 1.8;
+  line-height: 1.85;
+  color: var(--text);
 }
 
 .recipe-method li::before {
   content: counter(steps);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--accent);
   letter-spacing: 0.05em;
-  padding-top: 0.22rem;
+  padding-top: 0.24rem;
   flex-shrink: 0;
   min-width: 1rem;
   text-align: right;
+  opacity: 0.8;
 }
 
 .recipe__tcm {
@@ -567,18 +582,19 @@ a { color: inherit; text-decoration: none; }
 }
 
 .recipe__tcm-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.32em;
+  font-size: 0.58rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-quiet);
   margin-bottom: 0.6rem;
+  font-style: italic;
 }
 
 .recipe__tcm p {
   font-size: 0.9rem;
   color: var(--text-muted);
   font-style: italic;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 /* ── TAGS ────────────────────────────────────── */
@@ -593,13 +609,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 .entry-tag {
-  font-size: 0.65rem;
+  font-size: 0.63rem;
   letter-spacing: 0.18em;
   text-transform: lowercase;
   color: var(--text-muted);
   border: 1px solid var(--rule);
-  padding: 0.3rem 0.8rem;
+  padding: 0.3rem 0.85rem;
   transition: all 0.2s;
+  font-style: italic;
 }
 .entry-tag:hover {
   color: var(--text);
@@ -619,13 +636,15 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(2.2rem, 6vw, 3.8rem);
   letter-spacing: 0.22em;
   margin-bottom: 0.75rem;
+  color: var(--text);
 }
 
 .jieqi-page-header-sub {
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
+  font-size: 0.7rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-muted);
+  font-style: italic;
 }
 
 .jieqi-index {
@@ -654,10 +673,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 .season-block__en {
-  font-size: 0.68rem;
-  letter-spacing: 0.32em;
+  font-size: 0.66rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-quiet);
+  font-style: italic;
 }
 
 .jieqi-grid {
@@ -694,10 +714,11 @@ a.jieqi-item:hover { background: var(--bg-raised); }
 }
 
 .jieqi-item__num {
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
   color: var(--text-quiet);
   margin-bottom: 0.55rem;
+  font-style: italic;
 }
 
 .jieqi-item__zh {
@@ -714,7 +735,7 @@ a.jieqi-item:hover { background: var(--bg-raised); }
 
 .jieqi-item__pinyin {
   font-style: italic;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   display: block;
   margin-bottom: 0.2rem;
 }
@@ -723,10 +744,11 @@ a.jieqi-item:hover { background: var(--bg-raised); }
 .jieqi-item--quiet .jieqi-item__pinyin  { color: var(--text-quiet); }
 
 .jieqi-item__date {
-  font-size: 0.65rem;
+  font-size: 0.63rem;
   letter-spacing: 0.1em;
   color: var(--text-quiet);
   display: block;
+  font-style: italic;
 }
 
 .jieqi-item--active .jieqi-item__date { color: var(--accent); }
@@ -734,10 +756,11 @@ a.jieqi-item:hover { background: var(--bg-raised); }
 .jieqi-item__badge {
   display: inline-block;
   margin-top: 0.6rem;
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
+  font-style: italic;
 }
 
 /* ── SCROLLBAR ───────────────────────────────── */
@@ -746,7 +769,7 @@ a.jieqi-item:hover { background: var(--bg-raised); }
 ::-webkit-scrollbar-thumb { background: var(--rule); }
 
 ::selection {
-  background: rgba(139, 26, 26, 0.38);
+  background: rgba(200, 90, 53, 0.15);
   color: var(--text);
 }
 

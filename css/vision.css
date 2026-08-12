@@ -1,0 +1,162 @@
+/* ============================================================
+   維時 — vision prototype
+   pitch black · blown-up 正楷 · zoom-into-the-name navigation
+   ============================================================ */
+
+@import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
+
+:root{
+  --ink:#000;
+  --paper:#f4f1ea;
+  --dim:#5c5850;
+  --dim2:#38352f;
+  --glow:#f7f4ec;
+  --kai:"LXGW WenKai TC","Noto Serif TC",serif;
+  --latin:"Cormorant Garamond",Georgia,serif;
+  --ease:cubic-bezier(.7,.02,.16,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{height:100%;background:#000;color:var(--paper);}
+body{
+  font-family:var(--latin);
+  overflow:hidden;                 /* the whole thing is one framed stage */
+  -webkit-font-smoothing:antialiased;
+}
+
+/* film grain over everything — the moody dither */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:60;
+  opacity:.05;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+}
+
+/* ------------------------------------------------------------ stage */
+.stage{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1200px;
+}
+
+/* the blown-up name — this is the whole page */
+.name{
+  position:relative;
+  display:flex;gap:.02em;
+  font-family:var(--kai);
+  font-size:min(46vw,58vh);
+  line-height:.9;
+  color:var(--glow);
+  letter-spacing:-.02em;
+  transform:scale(1);
+  transition:transform 1.5s var(--ease), opacity 1.5s var(--ease), filter 1.5s var(--ease);
+  will-change:transform,opacity;
+  z-index:2;
+  text-shadow:0 0 90px rgba(247,244,236,.10);
+}
+.name span{display:block;position:relative}
+
+/* faint radial breath behind the name */
+.stage::before{
+  content:"";position:absolute;width:120vmin;height:120vmin;border-radius:50%;
+  background:radial-gradient(circle,rgba(90,84,72,.22),transparent 62%);
+  z-index:1;transition:opacity 1.5s var(--ease);
+}
+
+/* small captions floating around the name in cover state */
+.meta{
+  position:fixed;z-index:5;font-family:var(--latin);color:var(--dim);
+  letter-spacing:.42em;text-transform:uppercase;font-size:.66rem;
+  transition:opacity .9s var(--ease);
+}
+.meta--pinyin{top:calc(50% - min(23vw,29vh) - 2.4rem);left:50%;transform:translateX(-50%);
+  font-style:italic;letter-spacing:.5em;font-size:.8rem;color:#8a857a;}
+.meta--gloss{bottom:calc(50% - min(23vw,29vh) - 2.6rem);left:50%;transform:translateX(-50%);
+  letter-spacing:.5em;}
+.meta--enter{bottom:2.4rem;left:50%;transform:translateX(-50%);color:#6b665c;
+  animation:pulse 3.4s ease-in-out infinite;cursor:pointer;}
+.meta--year{top:2.2rem;right:2.4rem;letter-spacing:.3em;}
+
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:.9}}
+
+/* ------------------------------------------------------------ zoomed / map state */
+body[data-state="map"] .name{
+  transform:scale(3.9) translateY(4%);
+  opacity:.14;
+  filter:blur(1px);
+}
+body[data-state="map"] .stage::before{opacity:.5}
+body[data-state="map"] .meta{opacity:0;pointer-events:none;}
+
+/* the table of contents, nested "inside" the name */
+.toc{
+  position:fixed;inset:0;z-index:10;
+  display:grid;place-content:center;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(1.2rem,4vw,4rem);
+  padding:clamp(2rem,7vw,7rem);
+  opacity:0;pointer-events:none;
+  transition:opacity 1.2s var(--ease) .35s;
+}
+body[data-state="map"] .toc{opacity:1;pointer-events:auto;}
+
+.season{display:flex;flex-direction:column;gap:.55rem;
+  transform:translateY(22px);opacity:0;
+  transition:transform 1s var(--ease),opacity 1s var(--ease);}
+body[data-state="map"] .season{transform:none;opacity:1;}
+body[data-state="map"] .season:nth-child(1){transition-delay:.45s}
+body[data-state="map"] .season:nth-child(2){transition-delay:.58s}
+body[data-state="map"] .season:nth-child(3){transition-delay:.71s}
+body[data-state="map"] .season:nth-child(4){transition-delay:.84s}
+
+.season__head{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.6rem;
+  border-bottom:1px solid rgba(120,114,102,.22);padding-bottom:.5rem;}
+.season__zh{font-family:var(--kai);font-size:1.7rem;color:var(--glow);line-height:1;}
+.season__en{font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);}
+
+.term{display:flex;align-items:baseline;gap:.55rem;text-decoration:none;color:inherit;
+  padding:.18rem 0;transition:color .3s,transform .3s;}
+.term:hover{transform:translateX(5px);}
+.term__zh{font-family:var(--kai);font-size:1.16rem;color:#c9c3b6;transition:color .3s,text-shadow .3s;}
+.term:hover .term__zh{color:var(--glow);text-shadow:0 0 22px rgba(247,244,236,.5);}
+.term__en{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#565248;}
+.term--active .term__zh{color:#f4c96b;}
+.term--active .term__en{color:#8a7d52;}
+.term__dot{width:5px;height:5px;border-radius:50%;background:#3a362f;flex:0 0 auto;
+  margin-right:.1rem;transition:background .3s;}
+.term--active .term__dot{background:#f4c96b;box-shadow:0 0 10px #f4c96b;}
+.term:hover .term__dot{background:var(--glow);}
+
+/* ------------------------------------------------------------ the pointillist specimen */
+.specimen{
+  position:fixed;z-index:8;left:clamp(1rem,5vw,5rem);bottom:clamp(1rem,5vw,5rem);
+  width:clamp(150px,17vw,240px);
+  opacity:0;transform:translateY(28px) scale(.96);
+  transition:opacity 1.3s var(--ease) .9s,transform 1.3s var(--ease) .9s;
+  pointer-events:none;
+}
+body[data-state="map"] .specimen{opacity:1;transform:none;}
+.specimen svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 40px rgba(0,0,0,.8));}
+.specimen__cap{margin-top:.7rem;font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);}
+.specimen__cap em{color:#c9c3b6;font-style:italic;letter-spacing:.06em;text-transform:none;font-size:.72rem;}
+
+/* back control */
+.back{position:fixed;z-index:12;top:2.2rem;left:2.4rem;
+  font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--dim);
+  cursor:pointer;opacity:0;pointer-events:none;transition:opacity .8s var(--ease),color .3s;}
+.back:hover{color:var(--glow);}
+body[data-state="map"] .back{opacity:1;pointer-events:auto;transition-delay:.6s;}
+.back span{display:inline-block;margin-right:.5rem;}
+
+/* scroll hint arrow */
+.meta--enter .arrow{display:block;margin:.5rem auto 0;width:1px;height:20px;
+  background:linear-gradient(#6b665c,transparent);}
+
+@media (max-width:640px){
+  .name{font-size:44vw;flex-direction:row;}
+  .toc{grid-template-columns:repeat(2,1fr);gap:1.4rem 1.8rem;place-content:start center;
+    padding-top:5.5rem;overflow-y:auto;}
+  body[data-state="map"] .name{transform:scale(3) translateY(0);}
+  .specimen{display:none;}
+}

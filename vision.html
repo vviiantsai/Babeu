@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>維時 — 節氣記</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/vision.css">
+</head>
+<body data-state="cover">
+
+  <!-- ============ THE STAGE : blown-up 正楷 維時 on pitch black ============ -->
+  <div class="stage" id="stage">
+    <div class="name" id="name" aria-label="維時">
+      <span>維</span><span>時</span>
+    </div>
+  </div>
+
+  <!-- floating captions (cover state) -->
+  <div class="meta meta--pinyin">wéi&nbsp;shí</div>
+  <div class="meta meta--gloss">a seasonal record</div>
+  <div class="meta meta--year">節氣記 · 2026</div>
+  <div class="meta meta--enter" id="enter">
+    enter the name
+    <span class="arrow"></span>
+  </div>
+
+  <!-- back control (map state) -->
+  <div class="back" id="back"><span>&larr;</span>out</div>
+
+  <!-- ============ TABLE OF CONTENTS : nested inside the strokes ============ -->
+  <nav class="toc" aria-label="二十四節氣">
+
+    <div class="season">
+      <div class="season__head"><span class="season__zh">春</span><span class="season__en">Spring</span></div>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">立春</span><span class="term__en">Start of Spring</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">雨水</span><span class="term__en">Rain Water</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">驚蟄</span><span class="term__en">Awakening Insects</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">春分</span><span class="term__en">Spring Equinox</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">清明</span><span class="term__en">Clear &amp; Bright</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">穀雨</span><span class="term__en">Grain Rain</span></a>
+    </div>
+
+    <div class="season">
+      <div class="season__head"><span class="season__zh">夏</span><span class="season__en">Summer</span></div>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">立夏</span><span class="term__en">Start of Summer</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">小滿</span><span class="term__en">Grain Buds</span></a>
+      <a class="term term--active" href="mangzhong.html"><i class="term__dot"></i><span class="term__zh">芒種</span><span class="term__en">Grain in Ear ·now</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">夏至</span><span class="term__en">Summer Solstice</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">小暑</span><span class="term__en">Minor Heat</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">大暑</span><span class="term__en">Major Heat</span></a>
+    </div>
+
+    <div class="season">
+      <div class="season__head"><span class="season__zh">秋</span><span class="season__en">Autumn</span></div>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">立秋</span><span class="term__en">Start of Autumn</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">處暑</span><span class="term__en">End of Heat</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">白露</span><span class="term__en">White Dew</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">秋分</span><span class="term__en">Autumn Equinox</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">寒露</span><span class="term__en">Cold Dew</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">霜降</span><span class="term__en">Frost's Descent</span></a>
+    </div>
+
+    <div class="season">
+      <div class="season__head"><span class="season__zh">冬</span><span class="season__en">Winter</span></div>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">立冬</span><span class="term__en">Start of Winter</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">小雪</span><span class="term__en">Minor Snow</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">大雪</span><span class="term__en">Major Snow</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">冬至</span><span class="term__en">Winter Solstice</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">小寒</span><span class="term__en">Minor Cold</span></a>
+      <a class="term" href="#"><i class="term__dot"></i><span class="term__zh">大寒</span><span class="term__en">Major Cold</span></a>
+    </div>
+
+  </nav>
+
+  <!-- ============ POINTILLIST SPECIMEN : high-contrast, dithered edges ============ -->
+  <figure class="specimen">
+    <svg viewBox="0 0 200 200" role="img" aria-label="Pointillist specimen: loquat cluster">
+      <defs>
+        <!-- stipple: turbulence broken into hard dots, then used to fracture the edges -->
+        <filter id="stipple" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" seed="7" result="n"/>
+          <feColorMatrix in="n" type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 14 -6" result="mask"/>
+          <feComposite in="SourceGraphic" in2="mask" operator="in" result="dotted"/>
+          <feDisplacementMap in="dotted" in2="n" scale="7"/>
+        </filter>
+        <radialGradient id="fruit" cx="38%" cy="34%" r="72%">
+          <stop offset="0%" stop-color="#ffe9a8"/>
+          <stop offset="42%" stop-color="#f4b24a"/>
+          <stop offset="100%" stop-color="#8a4d11"/>
+        </radialGradient>
+        <radialGradient id="leaf" cx="40%" cy="30%" r="80%">
+          <stop offset="0%" stop-color="#9fe06a"/>
+          <stop offset="100%" stop-color="#123d0f"/>
+        </radialGradient>
+      </defs>
+
+      <g filter="url(#stipple)">
+        <!-- leaves -->
+        <path d="M40 70 C20 40 60 20 96 46 C74 66 58 74 40 70Z" fill="url(#leaf)"/>
+        <path d="M150 66 C176 40 150 14 112 44 C132 64 140 70 150 66Z" fill="url(#leaf)"/>
+        <!-- loquat cluster -->
+        <ellipse cx="82"  cy="120" rx="26" ry="30" fill="url(#fruit)"/>
+        <ellipse cx="122" cy="128" rx="27" ry="31" fill="url(#fruit)"/>
+        <ellipse cx="100" cy="160" rx="25" ry="29" fill="url(#fruit)"/>
+        <!-- calyx marks -->
+        <circle cx="82"  cy="142" r="4" fill="#5a2e08"/>
+        <circle cx="122" cy="151" r="4" fill="#5a2e08"/>
+        <circle cx="100" cy="182" r="4" fill="#5a2e08"/>
+      </g>
+    </svg>
+    <figcaption class="specimen__cap"><em>枇杷</em> &nbsp;loquat · 芒種</figcaption>
+  </figure>
+
+  <script>
+    const body  = document.body;
+    const enter = () => body.dataset.state = 'map';
+    const exit  = () => body.dataset.state = 'cover';
+    const toggle= () => body.dataset.state === 'map' ? exit() : enter();
+
+    document.getElementById('name').addEventListener('click', toggle);
+    document.getElementById('enter').addEventListener('click', enter);
+    document.getElementById('back').addEventListener('click', exit);
+
+    // scroll / wheel drives the zoom
+    let lock = false;
+    window.addEventListener('wheel', (e) => {
+      if (lock) return; lock = true; setTimeout(()=>lock=false, 900);
+      if (e.deltaY > 12) enter();
+      else if (e.deltaY < -12) exit();
+    }, { passive:true });
+
+    // esc pulls back out
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') exit(); });
+  </script>
+
+</body>
+</html>

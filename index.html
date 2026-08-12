@@ -111,18 +111,19 @@
 
   <script src="js/dither.js" defer></script>
   <script>
-    /* ---- I Ching sovereign hexagrams (消息卦), one per solar term ----
-       yang builds from the base at 冬至 (復) to full 乾, then yin returns to 坤.
-       pattern is bottom→top: 1 = yang (solid), 0 = yin (broken). */
+    /* ---- Human Design gates, one per solar term ----
+       Each term sits at an exact solar longitude; the HD wheel (Gate 25 at
+       0° Aries, 5.625° per gate, +3°52'30" offset) gives its gate.
+       [ bits(bottom→top, 1=yang), gate number, I Ching name ]. */
     const GUA = {
-      '立春':['110000','臨'],'雨水':['111000','泰'],'驚蟄':['111000','泰'],
-      '春分':['111100','大壯'],'清明':['111100','大壯'],'穀雨':['111110','夬'],
-      '立夏':['111110','夬'],'小滿':['111111','乾'],'芒種':['111111','乾'],
-      '夏至':['011111','姤'],'小暑':['011111','姤'],'大暑':['001111','遯'],
-      '立秋':['001111','遯'],'處暑':['000111','否'],'白露':['000111','否'],
-      '秋分':['000011','觀'],'寒露':['000011','觀'],'霜降':['000001','剝'],
-      '立冬':['000001','剝'],'小雪':['000000','坤'],'大雪':['000000','坤'],
-      '冬至':['100000','復'],'小寒':['100000','復'],'大寒':['110000','臨']
+      '立春':['101111',13,'同人'],'雨水':['101101',30,'離'],  '驚蟄':['101010',63,'既濟'],
+      '春分':['100111',25,'無妄'],'清明':['100101',21,'噬嗑'],'穀雨':['100010',3,'屯'],
+      '立夏':['000000',2,'坤'],  '小滿':['000010',8,'比'],  '芒種':['000101',35,'晉'],
+      '夏至':['001000',15,'謙'], '小暑':['001010',39,'蹇'], '大暑':['001101',56,'旅'],
+      '立秋':['010000',7,'師'],  '處暑':['010010',29,'坎'], '白露':['010101',64,'未濟'],
+      '秋分':['011000',46,'升'], '寒露':['011010',48,'井'], '霜降':['011101',50,'鼎'],
+      '立冬':['111111',1,'乾'],  '小雪':['111101',14,'大有'],'大雪':['111010',5,'需'],
+      '冬至':['110111',10,'履'], '小寒':['110101',38,'睽'], '大寒':['110010',60,'節']
     };
     function guaSVG(bits){
       const W=22,H=26,rows=6,gap=1.4,lh=(H-gap*(rows-1))/rows, mid=W/2, notch=3.2;
@@ -141,7 +142,11 @@
     document.querySelectorAll('.term').forEach(t=>{
       const zh = t.querySelector('.term__zh')?.textContent.trim();
       const g = GUA[zh];
-      if(g){ t.insertAdjacentHTML('beforeend', guaSVG(g[0])); t.title = g[1]+' · '+zh; }
+      if(g){
+        t.insertAdjacentHTML('beforeend',
+          `<span class="term__gate">${g[1]}</span>`+guaSVG(g[0]));
+        t.title = 'Gate '+g[1]+' · '+g[2]+' · '+zh;
+      }
     });
 
     const body     = document.body;

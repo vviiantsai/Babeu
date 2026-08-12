@@ -117,8 +117,13 @@ body[data-zoom] .portal{opacity:0;pointer-events:none;transition:opacity .5s;}
   padding:.32rem 0;transition:transform .3s;}
 .term:hover{transform:translateX(6px);}
 
-/* I Ching hexagram (消息卦) — six stacked bars, drawn in SVG */
-.term__gua{margin-left:auto;flex:0 0 auto;display:block;width:22px;height:26px;opacity:.8;
+/* Human Design gate number + hexagram, on the right rail */
+.term__gate{margin-left:auto;flex:0 0 auto;font-family:var(--latin);font-size:.72rem;
+  letter-spacing:.06em;color:#6a5836;font-style:italic;transition:color .3s;}
+.term:hover .term__gate{color:#c9a860;}
+.term--active .term__gate{color:var(--gold);}
+/* I Ching hexagram — six stacked bars, drawn in SVG */
+.term__gua{flex:0 0 auto;display:block;width:22px;height:26px;opacity:.8;
   transition:opacity .3s;}
 .term__gua line{stroke:#6a5836;stroke-width:2.6;transition:stroke .3s;}
 .term:hover .term__gua{opacity:1;}

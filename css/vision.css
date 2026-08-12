@@ -87,7 +87,7 @@ body[data-zoom] .portal{opacity:0;pointer-events:none;transition:opacity .5s;}
 .chambers{position:fixed;inset:0;z-index:20;pointer-events:none;}
 .chamber{
   position:absolute;left:var(--cx);top:var(--cy);transform:translate(-50%,-50%);
-  width:min(88vw,420px);opacity:0;pointer-events:none;
+  width:min(86vw,340px);opacity:0;pointer-events:none;
   transition:opacity 1s var(--ease);
 }
 .chamber.is-active{opacity:1;pointer-events:auto;transition-delay:1.15s;}
@@ -113,9 +113,18 @@ body[data-zoom] .portal{opacity:0;pointer-events:none;transition:opacity .5s;}
 .chamber__months{margin-left:auto;font-size:.56rem;letter-spacing:.24em;
   text-transform:uppercase;color:var(--dim);}
 
-.term{display:flex;align-items:baseline;gap:.6rem;text-decoration:none;color:inherit;
-  padding:.3rem 0;transition:transform .3s;}
+.term{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit;
+  padding:.32rem 0;transition:transform .3s;}
 .term:hover{transform:translateX(6px);}
+
+/* I Ching hexagram (消息卦) — six stacked bars, drawn in SVG */
+.term__gua{margin-left:auto;flex:0 0 auto;display:block;width:22px;height:26px;opacity:.8;
+  transition:opacity .3s;}
+.term__gua line{stroke:#6a5836;stroke-width:2.6;transition:stroke .3s;}
+.term:hover .term__gua{opacity:1;}
+.term:hover .term__gua line{stroke:#c9a860;}
+.term--active .term__gua{opacity:1;}
+.term--active .term__gua line{stroke:var(--gold);}
 .term__dot{width:5px;height:5px;border-radius:50%;background:#3a362f;flex:0 0 auto;
   transition:background .3s,box-shadow .3s;}
 .term__zh{font-family:var(--kai);font-size:1.3rem;color:#cbc5b8;
